@@ -10,12 +10,12 @@ interface ShowroomPageProps {
 
 export const ShowroomPage: React.FC<ShowroomPageProps> = ({ settings, onShowToast }) => {
   useEffect(() => {
-    document.title = 'Showroom Thảo Điền | CDHome Atelier';
+    document.title = 'Showroom CDHome | CDHome Atelier';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   const handleBookVisit = () => {
-    contactUtils.copyAndOpenZalo(settings, null, 'Chào CDHome, tôi muốn đặt lịch ghé thăm showroom Thảo Điền.', onShowToast);
+    contactUtils.copyAndOpenZalo(settings, null, 'Chào CDHome, tôi muốn đặt lịch ghé thăm showroom CDHome.', onShowToast);
   };
 
   return (
@@ -25,7 +25,7 @@ export const ShowroomPage: React.FC<ShowroomPageProps> = ({ settings, onShowToas
         <div className="absolute inset-0 opacity-20 mix-blend-luminosity">
           <img
             src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1920&q=80"
-            alt="Showroom Thảo Điền"
+            alt="Showroom CDHome"
             className="w-full h-full object-cover"
           />
         </div>
@@ -34,10 +34,10 @@ export const ShowroomPage: React.FC<ShowroomPageProps> = ({ settings, onShowToas
             Không Gian Tĩnh Lặng & Trải Nghiệm Thực Tế
           </span>
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-white">
-            Showroom CDHome Thảo Điền
+            Showroom CDHome
           </h1>
           <p className="text-sm sm:text-base text-[#D2C4BA] max-w-2xl mx-auto font-light leading-relaxed">
-            Một chốn dừng chân giữa lòng Thảo Điền, nơi hội tụ những tác phẩm nội thất gỗ tự nhiên theo triết lý Japandi, tôn vinh nghệ thuật sống chậm và tĩnh tại.
+            Một chốn dừng chân tại CDHome, nơi hội tụ những tác phẩm nội thất gỗ tự nhiên theo triết lý Japandi, tôn vinh nghệ thuật sống chậm và tĩnh tại.
           </p>
           <div className="pt-4 flex justify-center">
             <button
@@ -65,14 +65,14 @@ export const ShowroomPage: React.FC<ShowroomPageProps> = ({ settings, onShowToas
               Được thành lập bởi những kiến trúc sư và nghệ nhân tâm huyết, CDHome tin rằng mỗi căn nhà là một chốn tịnh dưỡng linh thiêng. Chúng tôi không chạy theo xu hướng sản xuất công nghiệp hàng loạt; từng đường mộng ghép, bề mặt lau dầu tự nhiên và độ uốn của gỗ đều được gia công tỉ mỉ để đạt được tỷ lệ vàng thị giác.
             </p>
             <p className="text-xs sm:text-sm text-[#4E453E] leading-relaxed font-light text-justify">
-              Tại showroom Thảo Điền, quý khách có thể thả mình trên chiếc sofa Roma Grand, chạm tay vào thớ gỗ sồi Bắc Mỹ của giường Mộc Miên hay thử độ mát lạnh của phiến đá Carrara tự nhiên.
+              Tại showroom CDHome, quý khách có thể thả mình trên chiếc sofa Roma Grand, chạm tay vào thớ gỗ sồi Bắc Mỹ của giường Mộc Miên hay thử độ mát lạnh của phiến đá Carrara tự nhiên.
             </p>
           </div>
 
           <div className="lg:col-span-6 grid grid-cols-2 gap-4">
             <img
               src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80"
-              alt="Góc đọc sách Thảo Điền"
+              alt="Góc đọc sách CDHome"
               className="rounded-2xl border border-[#D2C4BA] aspect-[4/5] object-cover"
             />
             <img

@@ -3,8 +3,8 @@ import { Category, Product, StoreSettings, User, Favorite } from '../types';
 export const INITIAL_SETTINGS: StoreSettings = {
   name: 'CDHome',
   logo: '/cdhome-logo.svg',
-  phone: '0988123456',
-  zaloPhone: '0988123456',
+  phone: '0973247076',
+  zaloPhone: '0973247076',
   messengerUsername: 'cdhomeatelier',
   facebookPageUrl: 'https://facebook.com/cdhomeatelier',
   email: 'tuvan@cdhomeatelier.vn',

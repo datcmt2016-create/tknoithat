@@ -272,7 +272,19 @@ export const dataService = {
 
   // --- Settings ---
   getSettings(): StoreSettings {
-    return storage.get<StoreSettings>(SETTINGS_KEY, INITIAL_SETTINGS);
+    const settings = storage.get<StoreSettings>(SETTINGS_KEY, INITIAL_SETTINGS);
+    // Migrate the old default hotline still saved in visitors' localStorage
+    const OLD_DEFAULT_PHONE = '0988123456';
+    if (settings.phone === OLD_DEFAULT_PHONE || settings.zaloPhone === OLD_DEFAULT_PHONE) {
+      const migrated = {
+        ...settings,
+        phone: settings.phone === OLD_DEFAULT_PHONE ? INITIAL_SETTINGS.phone : settings.phone,
+        zaloPhone: settings.zaloPhone === OLD_DEFAULT_PHONE ? INITIAL_SETTINGS.zaloPhone : settings.zaloPhone
+      };
+      storage.set(SETTINGS_KEY, migrated);
+      return migrated;
+    }
+    return settings;
   },
 
   updateSettings(newSettings: Partial<StoreSettings>): StoreSettings {

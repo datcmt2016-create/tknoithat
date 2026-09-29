@@ -17,7 +17,7 @@ export const Footer: React.FC<FooterProps> = ({
   onShowToast
 }) => {
   const handleBookVisit = () => {
-    contactUtils.copyAndOpenZalo(settings, null, 'Chào CDHome, tôi muốn đặt lịch ghé thăm showroom Thảo Điền.', onShowToast);
+    contactUtils.copyAndOpenZalo(settings, null, 'Chào CDHome, tôi muốn đặt lịch ghé thăm showroom CDHome.', onShowToast);
   };
 
   return (
@@ -30,7 +30,7 @@ export const Footer: React.FC<FooterProps> = ({
               Trải Nghiệm Thực Tế
             </span>
             <h3 className="font-serif text-2xl text-white font-normal">
-              Kính Mời Quý Khách Ghé Thăm Showroom Thảo Điền
+              Kính Mời Quý Khách Ghé Thăm Showroom CDHome
             </h3>
             <p className="text-xs text-[#D2C4BA] max-w-xl font-light">
               Tận mắt chiêm ngưỡng vân gỗ tự nhiên, cảm nhận độ hoàn thiện và nhận tư vấn chuyên sâu từ kiến trúc sư CDHome.
@@ -94,7 +94,7 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Showroom Address */}
           <div className="lg:col-span-4 space-y-4">
             <h4 className="text-xs font-bold uppercase tracking-wider text-white">
-              Không Gian Trưng Bày Thảo Điền
+              Không Gian Trưng Bày CDHome
             </h4>
             <div className="space-y-3 text-xs text-[#D2C4BA]">
               <div className="flex items-start gap-2.5">

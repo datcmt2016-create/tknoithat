@@ -51,7 +51,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   const handleBookVisitZalo = () => {
-    contactUtils.copyAndOpenZalo(settings, null, 'Chào CDHome, tôi muốn đặt lịch ghé thăm showroom Thảo Điền để xem các bộ sưu tập nội thất.', onShowToast);
+    contactUtils.copyAndOpenZalo(settings, null, 'Chào CDHome, tôi muốn đặt lịch ghé thăm showroom CDHome để xem các bộ sưu tập nội thất.', onShowToast);
   };
 
   return (
@@ -206,7 +206,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Showroom Visit Box (Using "Đặt lịch qua Zalo", NO booking forms) */}
       <div className="bg-[#F2EDE6] border border-[#D2C4BA] rounded-2xl p-5 shadow-xs relative overflow-hidden">
         <span className="text-[10px] uppercase font-mono tracking-widest text-[#523D2A] font-bold block mb-1">
-          Showroom Thảo Điền
+          Showroom CDHome
         </span>
         <h4 className="font-serif text-base font-normal text-[#1D1B17] mb-2">
           Ghé Thăm & Trải Nghiệm Thực Tế

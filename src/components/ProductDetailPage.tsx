@@ -150,7 +150,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               <div className="space-y-1">
                 <Palette className="w-5 h-5 mx-auto text-[#523D2A]" />
                 <p className="text-xs font-bold text-[#1D1B17]">Mẫu Gỗ & Da Vải</p>
-                <p className="text-[10px] text-[#4E453E]">Trực tiếp tại showroom Thảo Điền</p>
+                <p className="text-[10px] text-[#4E453E]">Trực tiếp tại showroom CDHome</p>
               </div>
             </div>
           </div>

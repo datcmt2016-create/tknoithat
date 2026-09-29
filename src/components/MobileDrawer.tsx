@@ -51,7 +51,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   };
 
   const handleBookVisitZalo = () => {
-    contactUtils.copyAndOpenZalo(settings, null, 'Chào CDHome, tôi muốn đặt lịch ghé thăm showroom Thảo Điền.', onShowToast);
+    contactUtils.copyAndOpenZalo(settings, null, 'Chào CDHome, tôi muốn đặt lịch ghé thăm showroom CDHome.', onShowToast);
     onClose();
   };
 
@@ -68,7 +68,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
               CDHOME
             </div>
             <div className="text-[10px] tracking-wider uppercase text-[#D2C4BA]">
-              Atelier Serenity • Thảo Điền
+              Atelier Serenity • CDHome
             </div>
           </div>
           <button
@@ -150,7 +150,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
           >
             <div className="flex items-center gap-2.5">
               <MapPin className="w-4 h-4 text-[#523D2A]" />
-              <span>Showroom Thảo Điền</span>
+              <span>Showroom CDHome</span>
             </div>
             <ArrowRight className="w-3.5 h-3.5 text-[#4E453E]" />
           </button>

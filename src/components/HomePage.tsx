@@ -29,7 +29,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   const newProducts = products.filter((p) => p.isNew).slice(0, 4);
 
   const handleBookVisitZalo = () => {
-    contactUtils.copyAndOpenZalo(settings, null, 'Chào CDHome, tôi muốn đặt lịch ghé thăm showroom Thảo Điền.', onShowToast);
+    contactUtils.copyAndOpenZalo(settings, null, 'Chào CDHome, tôi muốn đặt lịch ghé thăm showroom CDHome.', onShowToast);
   };
 
   return (
@@ -47,7 +47,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
         <div className="relative z-10 max-w-2xl p-6 sm:p-10 md:p-14 space-y-4">
           <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.25em] text-[#F1E0C6] font-semibold block">
-            Atelier Serenity • Thảo Điền
+            Atelier Serenity • CDHome
           </span>
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal leading-tight text-white">
             {settings.heroHeadline}

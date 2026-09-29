@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { 
   Menu, Search, Heart, User as UserIcon, Phone, MessageSquare, 
-  X, ChevronRight, LogOut, MapPin, Shield
+  X, ChevronRight, LogOut, Shield
 } from 'lucide-react';
 import { Product, StoreSettings, User } from '../types';
 
@@ -11,7 +11,6 @@ interface NavbarProps {
   wishlistCount: number;
   onOpenMobileDrawer: () => void;
   onNavigateToFavorites: () => void;
-  onNavigateToShowroom: () => void;
   onOpenAuth: (mode?: 'login' | 'register') => void;
   onLogout: () => void;
   onSelectProduct: (product: Product) => void;
@@ -29,7 +28,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   wishlistCount,
   onOpenMobileDrawer,
   onNavigateToFavorites,
-  onNavigateToShowroom,
   onOpenAuth,
   onLogout,
   onSelectProduct,
@@ -79,12 +77,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-30 bg-[#FEF9F2]/95 backdrop-blur-md border-b border-[#D2C4BA] shadow-2xs font-sans">
-      {/* Top Quiet Luxury Notice Bar */}
-      <div className="bg-[#523D2A] text-[#FEF9F2] py-1.5 px-4 text-center text-[11px] font-medium tracking-wide flex items-center justify-center gap-2">
-        <span>✨ Không gian trưng bày Thảo Điền mở cửa đón khách từ 09:00 - 20:00 hàng ngày</span>
-        <span className="hidden md:inline-block text-[#D2C4BA]">• Hotline: {settings.phone}</span>
-      </div>
-
       {/* Main Navbar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-4">
         {/* Left: Mobile Drawer Trigger & Brand Logo */}
@@ -195,21 +187,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           )}
         </div>
 
-        {/* Right: Showroom Link, Favorites, Account */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Showroom link (desktop) */}
-          <button
-            onClick={onNavigateToShowroom}
-            className="hidden xl:flex items-center gap-1.5 px-3 py-2 rounded-full border border-[#D2C4BA] text-xs text-[#1D1B17] hover:bg-[#F2EDE6] transition-colors min-h-[44px]"
-          >
-            <MapPin className="w-3.5 h-3.5 text-[#523D2A]" />
-            <span>Showroom Thảo Điền</span>
-          </button>
-
+        {/* Right: Hotline, Favorites, Account */}
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {/* Hotline Quick Call (desktop) */}
           <a
             href={`tel:${settings.phone}`}
-            className="hidden lg:flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#F2EDE6] text-xs font-semibold text-[#523D2A] hover:bg-[#F1E0C6] transition-colors min-h-[44px]"
+            className="hidden lg:flex items-center gap-1.5 px-3 py-2 rounded-full whitespace-nowrap bg-[#F2EDE6] text-xs font-semibold text-[#523D2A] hover:bg-[#F1E0C6] transition-colors min-h-[44px]"
           >
             <Phone className="w-3.5 h-3.5" />
             <span className="font-mono">{settings.phone}</span>

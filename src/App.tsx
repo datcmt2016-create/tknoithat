@@ -185,7 +185,7 @@ export default function App() {
     if (routeInfo.type === 'home') {
       document.title = 'CDHome Atelier | Nội Thất Tinh Tế & Chế Tác Gỗ Tự Nhiên';
     } else if (routeInfo.type === 'showroom') {
-      document.title = 'Showroom Thảo Điền | CDHome Atelier';
+      document.title = 'Showroom CDHome | CDHome Atelier';
     } else if (routeInfo.type === 'favorites') {
       document.title = 'Tác Phẩm Yêu Thích | CDHome Atelier';
     } else if (routeInfo.type === 'search') {
@@ -482,7 +482,6 @@ export default function App() {
         wishlistCount={favoriteIds.length}
         onOpenMobileDrawer={() => setIsMobileDrawerOpen(true)}
         onNavigateToFavorites={() => navigate('/yeu-thich')}
-        onNavigateToShowroom={() => navigate('/showroom')}
         onOpenAuth={(mode) => handleOpenAuth(mode || 'login')}
         onLogout={handleLogout}
         onSelectProduct={(p) => navigate(`/san-pham/${p.slug}`)}
