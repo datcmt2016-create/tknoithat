@@ -4,6 +4,7 @@ import {
   Maximize2, Home, Check, Ruler
 } from 'lucide-react';
 import { Product } from '../types';
+import { DynamicBlueprint } from './DynamicBlueprint';
 
 type SpecKey = 'dimensions' | 'design' | 'materials' | 'usage';
 
@@ -27,7 +28,7 @@ export const ProductSpecs: React.FC<ProductSpecsProps> = ({ product, focusDimens
   const hasUsage = !!product.usageDescription?.trim() || !!product.suitability;
 
   const sections: { key: SpecKey; label: string; hint: string; icon: React.ElementType; show: boolean }[] = [
-    { key: 'dimensions', label: 'Kích thước & Bản vẽ', hint: 'Quy cách, bản vẽ 2D', icon: DraftingCompass, show: hasDimensions },
+    { key: 'dimensions', label: 'Kích thước & Bản vẽ', hint: 'Quy cách, bản vẽ 3 góc nhìn', icon: DraftingCompass, show: hasDimensions },
     { key: 'design', label: 'Thiết kế', hint: 'Triết lý & phong cách', icon: Sparkles, show: hasDesign },
     { key: 'materials', label: 'Vật liệu', hint: 'Cấu thành từng bộ phận', icon: Layers, show: hasMaterials },
     { key: 'usage', label: 'Công dụng & Độ phù hợp', hint: 'Không gian & cách phối', icon: Sofa, show: hasUsage }
@@ -69,10 +70,36 @@ export const ProductSpecs: React.FC<ProductSpecsProps> = ({ product, focusDimens
     setOpenItems((prev) => (prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]));
 
   // --- Panels ---
+  const hasBlueprints = product.items.length > 0;
+  const hasStatic = product.dimensionImages.length > 0;
   const renderDimensions = () => (
-    <div className={`grid grid-cols-1 gap-6 ${product.dimensionImages.length > 0 ? 'lg:grid-cols-5' : ''}`}>
-      {product.dimensionImages.length > 0 && (
-        <div className="lg:col-span-3 space-y-3">
+    <div className={`grid grid-cols-1 gap-6 ${hasBlueprints ? 'lg:grid-cols-5' : ''}`}>
+      {hasBlueprints && (
+        <div className="lg:col-span-3 space-y-4 min-w-0">
+          {product.items.map((item, i) => (
+            <DynamicBlueprint
+              key={i}
+              name={product.name}
+              itemName={item.name}
+              code={product.code}
+              categoryId={product.categoryId}
+              length={item.dimensions.length}
+              width={item.dimensions.width}
+              height={item.dimensions.height}
+              className="border border-[#D2C4BA] rounded-2xl overflow-hidden"
+            />
+          ))}
+          <p className="text-[11px] text-[#4E453E] font-light">
+            Bản vẽ được dựng tự động từ kích thước từng phiên bản, tỷ lệ minh họa (D = Dài, R = Rộng, C = Cao, đơn vị cm).
+          </p>
+        </div>
+      )}
+
+      {hasStatic && (
+        <div className={`space-y-3 ${hasBlueprints ? 'lg:col-span-5' : ''}`}>
+          {hasBlueprints && (
+            <p className="text-[11px] font-bold uppercase tracking-wider text-[#523D2A]">Bản vẽ chi tiết từ xưởng</p>
+          )}
           {product.dimensionImages.map((src, i) => (
             <button
               key={src}
@@ -88,14 +115,11 @@ export const ProductSpecs: React.FC<ProductSpecsProps> = ({ product, focusDimens
               </span>
             </button>
           ))}
-          <p className="text-[11px] text-[#4E453E] font-light">
-            Bản vẽ minh họa tỷ lệ tương đối. Chạm vào bản vẽ để phóng to và xem chi tiết từng số đo.
-          </p>
         </div>
       )}
 
       {product.items.length > 0 && (
-        <div className={`space-y-3 ${product.dimensionImages.length > 0 ? 'lg:col-span-2' : ''}`}>
+        <div className={`space-y-3 ${hasBlueprints ? 'lg:col-span-2' : ''}`}>
           {product.items.map((item, i) => (
             <div key={i} className="rounded-2xl border border-[#D2C4BA] bg-[#FEF9F2] p-4 space-y-3">
               <p className="text-sm font-semibold text-[#1D1B17]">{item.name}</p>

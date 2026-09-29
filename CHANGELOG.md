@@ -7,15 +7,32 @@
 
 | Chỉ số | Giá trị |
 |---|---|
-| Tổng số lần cập nhật thành công | 11 |
-| Lần cập nhật gần nhất | 29/09/2026 15:00 |
-| Commit gần nhất trên GitHub | xem mục mới nhất bên dưới |
+| Tổng số lần cập nhật thành công | 13 |
+| Lần cập nhật gần nhất | 29/09/2026 19:15 |
+| Commit gần nhất trên GitHub | `52a4b24` (29/09/2026 15:01, gồm 6 cập nhật từ 13:44 đến 15:00) |
 | Đang chờ kiểm tra | 0 |
 | Test tự động gần nhất | 78/80 đạt toàn website (2 case lỗi: 3 danh mục con chưa có sản phẩm) |
 
 ---
 
 ## ✅ Đã hoàn thành
+
+### 29/09/2026 19:15 — Bản vẽ theo hình dáng thực tế + bổ sung Điểm chạm chế tác · chưa commit
+- **`DynamicBlueprint.tsx`**: tự nhận diện loại đồ theo tên/danh mục (sofa, giường, daybed, bàn, ghế, tủ, kệ sách, tab đầu giường); giữ nguyên nền caro vàng và nét nâu, chỉ thêm nét vẽ bên trong
+  - Sofa: tay vịn, lưng tựa, nệm chia theo số chỗ, chân ghế; mặt bằng chia khối nệm + chú thích "Mặt ngồi sâu Ncm"; mặt cạnh lưng tựa vát cong, tay vịn phía trước; sofa góc L vẽ đúng hình chữ L
+  - Tủ: chia cánh (2/4 cánh theo tên), tay nắm, kính phản chiếu, chân đế; kệ sách chia tầng có sách; bàn: mặt mỏng + chân + thanh giằng, bàn có tủ phụ; giường: đầu giường, gối, nệm, chân; ghế: lưng, đệm, chân (ghế xoay, ghế bar)
+  - Đèn, thảm, tượng vẫn vẽ khối trơn (chưa có nét riêng)
+- **`craftEnhancements.ts` (mới)**: thêm 3 "Điểm chạm chế tác" + 1-2 ý "Không gian phù hợp" + 1 ý "Gợi ý phối hợp" cho cả 24 sản phẩm; ghép trong `initialData.ts`; `dataService.ts` tự cập nhật cho sản phẩm chưa chỉnh sửa trong trình duyệt cũ
+- Kiểm tra: `tsc` sạch; chụp PC + mobile các loại sofa, giường, tủ, bàn, ghế, kệ, bàn làm việc; test 78/80 (2 case cũ)
+- File: `DynamicBlueprint.tsx`, `ProductSpecs.tsx`, `data/craftEnhancements.ts`, `data/initialData.ts`, `services/dataService.ts`
+
+### 29/09/2026 18:57 — Tự động tạo bản vẽ kỹ thuật cho mọi sản phẩm · chưa commit
+- **Component mới `DynamicBlueprint.tsx`**: vẽ SVG 3 góc nhìn (Mặt đứng chính, Mặt đứng cạnh, Mặt bằng) từ Dài/Rộng/Cao; nền giấy cream có lưới caro, nét nâu ấm, đường gióng kích thước D/R/C, đường tâm, khung tên
+- **Responsive**: đo bề rộng thật, PC xếp 2 góc nhìn trên + mặt bằng và khung tên dưới; mobile xếp dọc, chữ luôn đọc được
+- **`ProductSpecs.tsx`**: mỗi tùy chọn trong `product.items` tự có bản vẽ; ảnh tĩnh `dimensionImages` (nếu có) giữ lại làm "Bản vẽ chi tiết từ xưởng"
+- `ProductDetailPage.tsx`: nút "Xem bản vẽ kỹ thuật & thông số chi tiết" hiện cho mọi sản phẩm có kích thước
+- Kiểm tra: `tsc` sạch, chụp PC + mobile đạt, test 78/80 (2 case cũ)
+- File: `DynamicBlueprint.tsx`, `ProductSpecs.tsx`, `ProductDetailPage.tsx`
 
 ### 29/09/2026 15:00 — Sửa lỗi nút tim, rà soát vùng chạm, thay ảnh hỏng
 - **Nút tim trên thẻ sản phẩm**: bấm tim không còn bị chuyển sang trang chi tiết (chặn nổi bọt sự kiện); nút Zalo trên thẻ cũng chặn tương tự

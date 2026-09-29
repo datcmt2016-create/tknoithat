@@ -317,6 +317,11 @@ export const dataService = {
       if (next.updatedAt === seed.updatedAt) {
         if (seed.materials.length > (next.materials || []).length) next.materials = seed.materials;
         if (seed.items.length > (next.items || []).length) next.items = seed.items;
+        if (seed.highlights.length > (next.highlights || []).length) next.highlights = seed.highlights;
+        if (seed.suitability && (seed.suitability.spaces.length > (next.suitability?.spaces.length ?? 0)
+          || seed.suitability.pairings.length > (next.suitability?.pairings.length ?? 0))) {
+          next.suitability = seed.suitability;
+        }
       }
       if (JSON.stringify(next) !== JSON.stringify(p)) changed = true;
       return next;

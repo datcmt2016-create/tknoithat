@@ -1,5 +1,6 @@
 import { Category, Product, StoreSettings, User, Favorite } from '../types';
 import { PRODUCT_DETAILS } from './productDetails';
+import { CRAFT_ENHANCEMENTS } from './craftEnhancements';
 
 export const INITIAL_SETTINGS: StoreSettings = {
   name: 'CDHome',
@@ -1147,17 +1148,33 @@ const BASE_PRODUCTS: Product[] = [
   }
 ];
 
-// Ghép nội dung "Thông Số & Chi Tiết Tác Phẩm" (productDetails.ts) vào từng sản phẩm
-export const INITIAL_PRODUCTS: Product[] = BASE_PRODUCTS.map((product) => {
-  const detail = PRODUCT_DETAILS[product.id];
-  if (!detail) return product;
+// Ghép nội dung "Thông Số & Chi Tiết Tác Phẩm" (productDetails.ts) và phần bổ sung
+// "Điểm Chạm Chế Tác" / "Độ phù hợp" (craftEnhancements.ts) vào từng sản phẩm
+export const INITIAL_PRODUCTS: Product[] = BASE_PRODUCTS.map((base) => {
+  const detail = PRODUCT_DETAILS[base.id];
+  const product: Product = detail
+    ? {
+        ...base,
+        usageDescription: detail.usageDescription,
+        designPhilosophy: detail.designPhilosophy,
+        suitability: detail.suitability,
+        materials: detail.materials ?? base.materials,
+        items: detail.items ?? base.items
+      }
+    : base;
+
+  const extra = CRAFT_ENHANCEMENTS[product.id];
+  if (!extra) return product;
   return {
     ...product,
-    usageDescription: detail.usageDescription,
-    designPhilosophy: detail.designPhilosophy,
-    suitability: detail.suitability,
-    materials: detail.materials ?? product.materials,
-    items: detail.items ?? product.items
+    highlights: [...product.highlights, ...extra.highlights],
+    suitability: product.suitability
+      ? {
+          ...product.suitability,
+          spaces: [...product.suitability.spaces, ...extra.spaces],
+          pairings: [...product.suitability.pairings, ...extra.pairings]
+        }
+      : product.suitability
   };
 });
 

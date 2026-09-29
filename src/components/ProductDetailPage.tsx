@@ -236,7 +236,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                   onClick={() => setFocusDimensionsRequest((n) => n + 1)}
                   className="pt-1 text-xs font-semibold text-[#523D2A] hover:underline flex items-center gap-1 min-h-[44px]"
                 >
-                  <span>{product.dimensionImages.length > 0 ? 'Xem bản vẽ kỹ thuật & thông số chi tiết' : 'Xem thông số chi tiết'}</span>
+                  <span>Xem bản vẽ kỹ thuật & thông số chi tiết</span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </button>
               </div>
