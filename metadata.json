@@ -1,0 +1,6 @@
+{
+  "name": "CDHome Atelier - Showroom Nội Thất Cao Cấp",
+  "description": "Showroom trực tuyến trưng bày nội thất cao cấp CDHome Atelier. Khám phá các bộ sưu tập phòng khách, phòng ăn, phòng ngủ thiết kế tinh xảo và nhận báo giá tư vấn qua Zalo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
