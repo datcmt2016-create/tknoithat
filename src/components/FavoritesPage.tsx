@@ -289,7 +289,7 @@ export const FavoritesPage: React.FC<FavoritesPageProps> = ({
                 {/* Filled Heart to Remove */}
                 <button
                   onClick={() => onRemoveFavorite(p.id)}
-                  className="absolute top-2.5 right-2.5 min-w-[40px] min-h-[40px] rounded-full bg-white/95 text-red-600 shadow-md flex items-center justify-center hover:bg-white hover:scale-110 transition-all z-10"
+                  className="absolute top-2.5 right-2.5 min-w-[44px] min-h-[44px] rounded-full bg-white/95 text-red-600 shadow-md flex items-center justify-center hover:bg-white hover:scale-110 transition-all z-10"
                   title="Xóa khỏi danh sách yêu thích"
                   aria-label="Xóa khỏi yêu thích"
                 >

@@ -10,6 +10,8 @@ import { AdminProductForm } from './AdminProductForm';
 import { AdminCategories } from './AdminCategories';
 import { AdminUsers } from './AdminUsers';
 import { AdminSettings } from './AdminSettings';
+import { AdminPasswordCard } from './AdminPasswordCard';
+import { authService } from '../../services/authService';
 
 interface AdminLayoutProps {
   products: Product[];
@@ -226,6 +228,19 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
 
         {/* Dynamic Content */}
         <main className="flex-1 min-w-0">
+          {adminSubRoute !== 'cai-dat' && authService.isAdminDefaultPassword() && (
+            <div className="mb-4 p-3.5 rounded-2xl bg-amber-50 border border-amber-300 text-amber-900 text-xs flex flex-wrap items-center justify-between gap-2">
+              <span>
+                <strong>Bảo mật:</strong> Bạn đang dùng mật khẩu quản trị mặc định. Hãy đổi mật khẩu mới ngay.
+              </span>
+              <button
+                onClick={() => onNavigateAdminRoute('cai-dat')}
+                className="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold min-h-[36px]"
+              >
+                Đổi mật khẩu
+              </button>
+            </div>
+          )}
           {isEditingOrCreating ? (
             <AdminProductForm
               product={currentEditingProduct}
@@ -270,11 +285,14 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
               onShowToast={onShowToast}
             />
           ) : adminSubRoute === 'cai-dat' ? (
-            <AdminSettings
-              settings={settings}
-              onSaveSettings={onSaveSettings}
-              onShowToast={onShowToast}
-            />
+            <>
+              <AdminPasswordCard onShowToast={onShowToast} />
+              <AdminSettings
+                settings={settings}
+                onSaveSettings={onSaveSettings}
+                onShowToast={onShowToast}
+              />
+            </>
           ) : (
             <AdminOverview
               products={products}

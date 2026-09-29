@@ -48,6 +48,12 @@ export interface ProductColor {
   hex: string;
 }
 
+export interface ProductSuitability {
+  summary: string;     // Tóm tắt độ phù hợp (diện tích, phong cách)
+  spaces: string[];    // Không gian phù hợp
+  pairings: string[];  // Gợi ý phối hợp với đồ vật khác
+}
+
 export interface Product {
   id: string;
   code: string;
@@ -72,9 +78,12 @@ export interface Product {
   materials: ProductMaterial[];
   highlights: ProductHighlight[];
   details: ProductDetail[];
-  dimensionImages: string[];
+  dimensionImages: string[]; // Ảnh bản vẽ kích thước
   materialCards: MaterialCard[];
   lifestyleImage?: string;
+  usageDescription?: string; // Công dụng / Tính năng (đoạn văn cách nhau bởi dòng trống)
+  designPhilosophy?: string; // Thiết kế / Phong cách (đoạn văn cách nhau bởi dòng trống)
+  suitability?: ProductSuitability;
   relatedProductIds: string[];
 }
 
@@ -96,7 +105,6 @@ export interface StoreSettings {
   logo: string;
   phone: string;
   zaloPhone: string;
-  messengerUsername: string;
   facebookPageUrl: string;
   email: string;
   address: string;

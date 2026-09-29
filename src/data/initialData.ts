@@ -1,16 +1,16 @@
 import { Category, Product, StoreSettings, User, Favorite } from '../types';
+import { PRODUCT_DETAILS } from './productDetails';
 
 export const INITIAL_SETTINGS: StoreSettings = {
   name: 'CDHome',
   logo: '/cdhome-logo.svg',
   phone: '0973247076',
   zaloPhone: '0973247076',
-  messengerUsername: 'cdhomeatelier',
   facebookPageUrl: 'https://facebook.com/cdhomeatelier',
   email: 'tuvan@cdhomeatelier.vn',
-  address: '215 Nguyễn Văn Hưởng, Phường Thảo Điền, TP. Thủ Đức, TP. Hồ Chí Minh',
-  openingHours: '09:00 - 20:00 (Thứ 2 - Chủ Nhật)',
-  mapsUrl: 'https://maps.google.com/?q=215+Nguyen+Van+Huong+Thao+Dien+Thu+Duc',
+  address: 'Xã Tịnh Khê, Thành Phố Quảng Ngãi, Tỉnh Quảng Ngãi',
+  openingHours: '07:00 - 20:30 (Thứ 2 - Chủ Nhật)',
+  mapsUrl: 'https://maps.google.com/?q=Tinh+Khe,+Quang+Ngai',
   heroImage: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1920&q=85',
   heroHeadline: 'Không Gian Tĩnh Tại & Nghệ Thuật Chế Tác',
   heroTagline: 'Mỗi món đồ nội thất tại CDHome là sự kết hợp giữa triết lý Japandi tối giản và kỹ nghệ thủ công chuẩn mực từ gỗ óc chó tự nhiên.',
@@ -57,7 +57,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     name: 'Giường ngủ',
     slug: 'giuong-ngu',
     parentId: null,
-    image: 'https://images.unsplash.com/photo-1540518614846-7ede433c4ef7?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?auto=format&fit=crop&w=1200&q=80',
     description: 'Chốn tịnh dưỡng thân tâm cùng các thiết kế giường ngủ gỗ tự nhiên Mộc Miên mang phong vị Japandi thuần khiết.',
     order: 4,
     isVisible: true
@@ -147,7 +147,7 @@ export const INITIAL_CATEGORIES: Category[] = [
   { id: 'sub-sofa-san-vuon', name: 'Sofa Sân Vườn', slug: 'sofa-san-vuon', parentId: 'cat-ngoai-that', image: '', order: 2, isVisible: true }
 ];
 
-export const INITIAL_PRODUCTS: Product[] = [
+const BASE_PRODUCTS: Product[] = [
   // 1. Giường Gỗ Tự Nhiên Mộc Miên (Main highlight)
   {
     id: 'prod-001',
@@ -163,7 +163,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     createdAt: '2025-01-10T08:00:00Z',
     updatedAt: '2025-01-10T08:00:00Z',
     images: [
-      'https://images.unsplash.com/photo-1540518614846-7ede433c4ef7?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1200&q=80'
     ],
@@ -209,9 +209,7 @@ export const INITIAL_PRODUCTS: Product[] = [
         text: 'Lấy cảm hứng từ những đóa mộc miên nở rộ vào mùa xuân, chiếc giường như một nét chấm phá an yên trong gian phòng ngủ.'
       }
     ],
-    dimensionImages: [
-      'https://images.unsplash.com/photo-1540518614846-7ede433c4ef7?auto=format&fit=crop&w=800&q=80'
-    ],
+    dimensionImages: ['/drawings/giuong-moc-mien-king.svg'],
     materialCards: [
       {
         name: 'Gỗ Sồi Trắng Bắc Mỹ',
@@ -219,6 +217,28 @@ export const INITIAL_PRODUCTS: Product[] = [
       }
     ],
     lifestyleImage: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1200&q=80',
+    usageDescription:
+      'Mộc Miên được tạo ra cho một điều giản dị mà quý giá: giấc ngủ trọn vẹn. Hệ giát nan cong gỗ Bạch Dương phân tán đều trọng lượng cơ thể theo đường cong cột sống, giữ cho đệm luôn thông thoáng và kéo dài tuổi thọ đệm thêm nhiều năm.\n\n' +
+      'Tựa đầu vát góc 105° cho phép tựa lưng đọc sách, làm việc nhẹ hay thưởng trà trước giờ ngủ mà không cần kê thêm gối. Khoảng hở gầm giường 12 cm vừa đủ cho robot hút bụi đi qua, giữ không gian luôn sạch sẽ mà vẫn thanh thoát.\n\n' +
+      'Toàn bộ kết cấu liên kết bằng mộng chốt truyền thống, lắp ráp không cần ốc vít lộ: giường vững chãi, tĩnh lặng tuyệt đối, không phát ra tiếng kẽo kẹt dù sử dụng nhiều năm.',
+    designPhilosophy:
+      'Lấy cảm hứng từ đóa mộc miên nở giữa mùa xuân phương Bắc, thiết kế theo đuổi tinh thần Japandi: sự giao thoa giữa chữ “Ma” (khoảng lặng) của Nhật Bản và sự ấm áp công năng của Bắc Âu. Mọi chi tiết thừa đều được lược bỏ để vân gỗ tự thân lên tiếng.\n\n' +
+      'Đầu giường uốn cong mềm ở hai góc trên, phá vỡ sự cứng nhắc của khối chữ nhật và tạo cảm giác được “ôm” nhẹ nhàng khi nằm. Thanh vai giường thấp 35 cm kéo tầm mắt xuống gần mặt sàn, khiến trần phòng như cao hơn và căn phòng trở nên rộng rãi, thư thái.\n\n' +
+      'Bề mặt được lau dầu thực vật Rubio Monocoat thay vì sơn PU phủ bóng, giữ nguyên xúc cảm thớ gỗ dưới tay và để gỗ “thở” theo thời gian, càng dùng càng lên màu trầm ấm.',
+    suitability: {
+      summary: 'Hoàn hảo cho phòng ngủ master từ 14 m² trong căn hộ 70 - 120 m² hoặc nhà phố, biệt thự theo phong cách Japandi, Minimalist hay Wabi-sabi.',
+      spaces: [
+        'Phòng ngủ master từ 14 m² (bản King) hoặc từ 12 m² (bản Queen)',
+        'Căn hộ cao cấp, penthouse cần cảm giác thoáng đãng, trần thấp vẫn không bí bách',
+        'Homestay, resort boutique theo đuổi trải nghiệm nghỉ dưỡng tĩnh tại'
+      ],
+      pairings: [
+        'Tab đầu giường Tịnh Dưỡng An cùng tông gỗ sồi, chiều cao khớp mặt đệm',
+        'Chăn ga linen màu be, xám tro hoặc trắng ngà; thảm len dệt tay tông trung tính',
+        'Đèn giấy washi hoặc đèn thả gốm mờ tạo ánh sáng vàng ấm 2700K',
+        'Tránh đồ nội thất kim loại bóng, màu sắc rực, dễ phá vỡ sự tĩnh lặng tổng thể'
+      ]
+    },
     relatedProductIds: ['prod-002', 'prod-003', 'prod-008']
   },
 
@@ -278,7 +298,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     updatedAt: '2025-01-15T10:00:00Z',
     images: [
       'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1540518614846-7ede433c4ef7?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=80'
     ],
     mainImageIndex: 0,
     colors: [
@@ -339,12 +359,38 @@ export const INITIAL_PRODUCTS: Product[] = [
     ],
     materials: [
       { part: 'Bề mặt bọc', material: 'Da bò Aniline mộc 100% tuyển chọn từ Ý' },
-      { part: 'Khung sườn', material: 'Gỗ Dẻ Gai Châu Âu sấy nhiệt cao' }
+      { part: 'Khung sườn', material: 'Gỗ Dẻ Gai Châu Âu sấy nhiệt cao' },
+      { part: 'Đệm ngồi', material: 'Mút HR tỷ trọng 40 kg/m³ bọc lớp lông vũ tự nhiên 20%, túi vải chia ngăn chống xô lệch' },
+      { part: 'Đệm tựa lưng', material: 'Lông vũ vịt trắng pha sợi Fiber hồi phục nhanh, có khóa kéo tháo rời' },
+      { part: 'Hệ nâng đỡ', material: 'Đai thun đàn hồi Pirelli (Ý) đan chéo, chịu tải 150 kg mỗi chỗ ngồi' },
+      { part: 'Chân sofa', material: 'Thép đặc tiện CNC mạ PVD đồng thau xước mờ, lót nỉ chống trầy sàn' }
     ],
     highlights: [{ title: 'Da thở tự nhiên', text: 'Bề mặt giữ trọn vân da nguyên thủy, càng dùng càng lên nước bóng đẹp.' }],
     details: [],
-    dimensionImages: [],
+    dimensionImages: ['/drawings/sofa-roma-grand-3-cho.svg'],
     materialCards: [],
+    usageDescription:
+      'Roma Grand là trung tâm của những buổi tối sum vầy. Mặt ngồi rộng 216 cm cho ba người lớn ngồi thoải mái, hoặc một người nằm duỗi trọn chiều dài để thư giãn sau ngày dài.\n\n' +
+      'Chiều sâu ngồi 62 cm cùng chiều cao 43 cm được tính toán để bàn chân chạm sàn tự nhiên, đầu gối vuông góc, lưng tựa trọn vào lớp lông vũ mà không bị “lún chìm”. Tay vịn cao 60 cm đủ rộng để đặt một tách trà hay cuốn sách.\n\n' +
+      'Vỏ đệm tựa có khóa kéo tháo rời, lớp da Aniline chỉ cần lau ẩm và dưỡng da định kỳ 6 tháng một lần; không cần hóa chất tẩy rửa mạnh.',
+    designPhilosophy:
+      'Roma Grand theo đuổi tinh thần Quiet Luxury của các xưởng sofa Ý thập niên 70: sang trọng không nằm ở chi tiết trang trí, mà ở tỷ lệ chuẩn mực và chất liệu thượng hạng.\n\n' +
+      'Khối sofa thấp và sâu, đường viền may chỉ nổi tông-sur-tông chạy dọc tay vịn tạo nhịp điệu thị giác nhẹ nhàng. Tựa lưng thấp 78 cm giữ tầm nhìn thông suốt, rất phù hợp đặt giữa phòng khách mở hoặc quay lưng ra bàn ăn.\n\n' +
+      'Da Aniline mộc được thuộc bằng tanin thảo mộc, giữ trọn lỗ chân lông và vân nguyên bản của tấm da. Theo thời gian, bề mặt sẽ lên lớp patina bóng ấm độc bản, mỗi chiếc sofa kể một câu chuyện riêng của gia chủ.',
+    suitability: {
+      summary: 'Lý tưởng cho phòng khách từ 25 m² trong căn hộ 90 - 150 m², nhà phố hoặc biệt thự theo phong cách Quiet Luxury, Modern Classic hay Japandi ấm.',
+      spaces: [
+        'Phòng khách từ 25 m², khoảng cách tới kệ tivi lý tưởng 2,8 - 3,5 m',
+        'Phòng khách mở liên thông bếp - ăn, đặt quay lưng tạo vách ngăn mềm',
+        'Sảnh tiếp khách văn phòng điều hành, lounge khách sạn boutique'
+      ],
+      pairings: [
+        'Bàn trà đôi mặt đá cẩm thạch Carrara, đặt cách mép sofa 40 - 45 cm',
+        'Armchair Thư Giãn Milano tông nâu ấm đặt chéo góc 45°, tạo nhóm trò chuyện thân mật',
+        'Thảm len Moroccan Nomad kích thước tối thiểu 200 × 300 cm, chân trước sofa đặt trên thảm',
+        'Đèn sàn Arc Lamp chân đá tạo vùng sáng đọc sách ở một đầu sofa'
+      ]
+    },
     relatedProductIds: ['prod-005', 'prod-006']
   },
 
@@ -403,7 +449,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     updatedAt: '2025-01-20T15:00:00Z',
     images: [
       'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1580481077195-c228ff31a78a?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80'
     ],
     mainImageIndex: 0,
     colors: [{ name: 'Da Bò Cognac & Walnut', hex: '#634832' }],
@@ -441,7 +487,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     createdAt: '2025-01-22T08:00:00Z',
     updatedAt: '2025-01-22T08:00:00Z',
     images: [
-      'https://images.unsplash.com/photo-1533090161767-e6ffed986b88?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1532372320572-cda25653a26d?auto=format&fit=crop&w=1200&q=80'
     ],
     mainImageIndex: 0,
@@ -481,7 +527,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     updatedAt: '2025-01-25T09:00:00Z',
     images: [
       'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1533779283484-8da497b1736c?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1604578762246-41134e37f9cc?auto=format&fit=crop&w=1200&q=80'
     ],
     mainImageIndex: 0,
     colors: [{ name: 'Calacatta Vân Vàng', hex: '#FAF6EF' }],
@@ -520,7 +566,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     createdAt: '2025-01-28T10:00:00Z',
     updatedAt: '2025-01-28T10:00:00Z',
     images: [
-      'https://images.unsplash.com/photo-1533779283484-8da497b1736c?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1200&q=80'
     ],
     mainImageIndex: 0,
@@ -558,7 +604,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     updatedAt: '2025-02-01T11:00:00Z',
     images: [
       'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1533779283484-8da497b1736c?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=1200&q=80'
     ],
     mainImageIndex: 0,
     colors: [
@@ -634,7 +680,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     createdAt: '2025-02-05T10:00:00Z',
     updatedAt: '2025-02-05T10:00:00Z',
     images: [
-      'https://images.unsplash.com/photo-1580481077195-c228ff31a78a?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=1200&q=80'
     ],
     mainImageIndex: 0,
@@ -672,7 +718,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     updatedAt: '2025-02-07T11:00:00Z',
     images: [
       'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1540518614846-7ede433c4ef7?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=1200&q=80'
     ],
     mainImageIndex: 0,
     colors: [{ name: 'Kính Khói Khung Champagne', hex: '#A89988' }],
@@ -708,7 +754,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     createdAt: '2025-02-09T08:00:00Z',
     updatedAt: '2025-02-09T08:00:00Z',
     images: [
-      'https://images.unsplash.com/photo-1533090161767-e6ffed986b88?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80'
     ],
     mainImageIndex: 0,
@@ -1078,7 +1124,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     createdAt: '2025-02-26T16:00:00Z',
     updatedAt: '2025-02-26T16:00:00Z',
     images: [
-      'https://images.unsplash.com/photo-1540518614846-7ede433c4ef7?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80'
     ],
     mainImageIndex: 0,
@@ -1100,6 +1146,20 @@ export const INITIAL_PRODUCTS: Product[] = [
     relatedProductIds: ['prod-023']
   }
 ];
+
+// Ghép nội dung "Thông Số & Chi Tiết Tác Phẩm" (productDetails.ts) vào từng sản phẩm
+export const INITIAL_PRODUCTS: Product[] = BASE_PRODUCTS.map((product) => {
+  const detail = PRODUCT_DETAILS[product.id];
+  if (!detail) return product;
+  return {
+    ...product,
+    usageDescription: detail.usageDescription,
+    designPhilosophy: detail.designPhilosophy,
+    suitability: detail.suitability,
+    materials: detail.materials ?? product.materials,
+    items: detail.items ?? product.items
+  };
+});
 
 export const INITIAL_USERS: User[] = [
   {

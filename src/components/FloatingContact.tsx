@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageCircle, Phone, MessageSquare, X } from 'lucide-react';
+import { MessageCircle, Phone, X } from 'lucide-react';
 import { StoreSettings } from '../types';
 import { contactUtils } from '../utils/contact';
 
@@ -52,24 +52,10 @@ const FloatingContent: React.FC<{
     contactUtils.copyAndOpenZalo(settings, null, undefined, onShowToast);
   };
 
-  const handleMessenger = () => {
-    contactUtils.copyAndOpenMessenger(settings, null, undefined, onShowToast);
-  };
-
   return (
     <div className="flex flex-col items-end gap-3">
       {isOpen && (
         <div className="flex flex-col items-end gap-2.5 mb-1 animate-in fade-in slide-in-from-bottom-3 duration-200">
-          <button
-            onClick={handleMessenger}
-            className="flex items-center gap-2.5 px-4 py-2.5 bg-[#0084FF] text-white rounded-full shadow-lg hover:scale-105 transition-all text-xs font-medium min-h-[44px]"
-          >
-            <span>Messenger</span>
-            <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center">
-              <MessageSquare className="w-4 h-4" />
-            </div>
-          </button>
-
           <a
             href={`tel:${settings.phone}`}
             className="flex items-center gap-2.5 px-4 py-2.5 bg-[#523D2A] text-[#FEF9F2] rounded-full shadow-lg hover:scale-105 transition-all text-xs font-medium min-h-[44px]"

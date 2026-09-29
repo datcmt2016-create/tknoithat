@@ -46,36 +46,6 @@ export const contactUtils = {
     }, 150);
   },
 
-  copyAndOpenMessenger(
-    settings: StoreSettings,
-    product?: Product | null,
-    customText?: string,
-    onShowToast?: (msg: string) => void
-  ) {
-    let message = '';
-    if (product) {
-      const productUrl = `${window.location.origin}/san-pham/${product.slug}`;
-      message = `Chào CDHome, tôi muốn nhận báo giá sản phẩm ${product.name} - Mã ${product.code}: ${productUrl}`;
-    } else if (customText) {
-      message = customText;
-    } else {
-      message = 'Chào CDHome, tôi muốn được tư vấn/đặt lịch ghé showroom.';
-    }
-
-    if (typeof navigator !== 'undefined' && navigator.clipboard) {
-      navigator.clipboard.writeText(message).then(() => {
-        if (onShowToast) {
-          onShowToast('Đã sao chép nội dung, hãy dán vào khung chat');
-        }
-      });
-    }
-
-    const messengerUrl = `https://m.me/${settings.messengerUsername}`;
-    setTimeout(() => {
-      window.open(messengerUrl, '_blank');
-    }, 150);
-  },
-
   copyFavoritesAndOpenZalo(
     settings: StoreSettings,
     products: Product[],

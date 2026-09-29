@@ -58,16 +58,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
     <aside className="w-68 xl:w-72 flex-shrink-0 flex flex-col gap-6 select-none font-sans">
       {/* Category Accordion */}
       <div className="bg-[#FEF9F2] border border-[#D2C4BA] rounded-2xl p-4 shadow-xs">
-        <div className="flex items-center justify-between pb-3 mb-2 border-b border-[#F2EDE6]">
-          <div className="flex items-center gap-2">
-            <Layers className="w-4 h-4 text-[#523D2A]" />
-            <h2 className="text-xs font-bold uppercase tracking-wider text-[#1D1B17]">
-              Danh Mục Không Gian
-            </h2>
-          </div>
-          <span className="text-[10px] font-mono text-[#4E453E] bg-[#F2EDE6] px-2 py-0.5 rounded border border-[#D2C4BA]">
-            {categoryTree.length} bộ sưu tập
-          </span>
+        <div className="flex items-center gap-2 pb-3 mb-2 border-b border-[#F2EDE6]">
+          <Layers className="w-4 h-4 text-[#523D2A] shrink-0" />
+          <h2 className="text-xs font-bold uppercase tracking-wider text-[#1D1B17] whitespace-nowrap">
+            Danh Mục Không Gian
+          </h2>
         </div>
 
         {/* All Products Link */}
@@ -112,7 +107,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                           e.stopPropagation();
                           toggleCategoryGroup(category.id);
                         }}
-                        className="p-1 text-[#4E453E] hover:text-[#1D1B17]"
+                        className="min-w-[32px] min-h-[32px] -mr-1.5 flex items-center justify-center rounded-lg text-[#4E453E] hover:text-[#1D1B17] hover:bg-[#F2EDE6]"
                         aria-label="Mở rộng danh mục con"
                       >
                         {isGroupOpen ? (
@@ -223,7 +218,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </button>
         <div className="mt-3 pt-3 border-t border-[#D2C4BA] text-[11px] text-[#4E453E] flex items-center justify-between">
           <span>Hotline trực:</span>
-          <a href={`tel:${settings.phone}`} className="font-mono font-bold text-[#523D2A] hover:underline">
+          <a href={`tel:${settings.phone}`} className="font-mono font-bold text-[#523D2A] hover:underline inline-flex items-center min-h-[32px]">
             {settings.phone}
           </a>
         </div>

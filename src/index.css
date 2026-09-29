@@ -26,6 +26,18 @@
   }
 }
 
+/* Product specs tab panel transition */
+@keyframes spec-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.spec-fade-in {
+  animation: spec-fade-in 280ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .spec-fade-in { animation: none; }
+}
+
 /* Custom scrollbars and styling */
 ::-webkit-scrollbar {
   width: 6px;

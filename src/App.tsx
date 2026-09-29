@@ -482,6 +482,7 @@ export default function App() {
         wishlistCount={favoriteIds.length}
         onOpenMobileDrawer={() => setIsMobileDrawerOpen(true)}
         onNavigateToFavorites={() => navigate('/yeu-thich')}
+        onNavigateToShowroom={() => navigate('/showroom')}
         onOpenAuth={(mode) => handleOpenAuth(mode || 'login')}
         onLogout={handleLogout}
         onSelectProduct={(p) => navigate(`/san-pham/${p.slug}`)}
@@ -506,6 +507,7 @@ export default function App() {
             settings={settings}
             user={currentUser}
             isWishlisted={favoriteIds.includes(activeProduct.id)}
+            wishlistIds={favoriteIds}
             onToggleWishlist={handleToggleWishlist}
             onSelectProduct={(p) => navigate(`/san-pham/${p.slug}`)}
             onBackToCatalog={() => navigate('/')}
@@ -699,7 +701,6 @@ export default function App() {
       {/* Footer */}
       <Footer
         settings={settings}
-        onNavigateToAdmin={() => navigate(isAdminLoggedIn ? '/admin' : '/admin/login')}
         onNavigateToShowroom={() => navigate('/showroom')}
         onShowToast={showToast}
       />

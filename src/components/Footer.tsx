@@ -1,18 +1,16 @@
 import React from 'react';
-import { MapPin, Phone, Mail, Clock, Shield, MessageSquare, ExternalLink } from 'lucide-react';
+import { MapPin, Clock } from 'lucide-react';
 import { StoreSettings } from '../types';
 import { contactUtils } from '../utils/contact';
 
 interface FooterProps {
   settings: StoreSettings;
-  onNavigateToAdmin: () => void;
   onNavigateToShowroom: () => void;
   onShowToast: (msg: string) => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   settings,
-  onNavigateToAdmin,
   onNavigateToShowroom,
   onShowToast
 }) => {
@@ -117,26 +115,16 @@ export const Footer: React.FC<FooterProps> = ({
             <div className="space-y-2 text-xs text-[#D2C4BA]">
               <div>
                 <span className="text-[10px] text-[#D2C4BA]/70 block">Hotline trực tiếp:</span>
-                <a href={`tel:${settings.phone}`} className="font-mono text-base font-bold text-[#F1E0C6] hover:underline">
+                <a href={`tel:${settings.phone}`} className="font-mono text-base font-bold text-[#F1E0C6] hover:underline inline-flex items-center min-h-[44px]">
                   {settings.phone}
                 </a>
               </div>
               <div>
                 <span className="text-[10px] text-[#D2C4BA]/70 block">Email tư vấn bản vẽ:</span>
-                <a href={`mailto:${settings.email}`} className="text-stone-300 hover:text-white">
+                <a href={`mailto:${settings.email}`} className="text-stone-300 hover:text-white inline-flex items-center min-h-[44px] break-all">
                   {settings.email}
                 </a>
               </div>
-            </div>
-
-            <div className="pt-4 border-t border-[#2D2A26]">
-              <button
-                onClick={onNavigateToAdmin}
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#26221D] border border-[#3A352F] text-[#D2C4BA] hover:text-white text-xs transition-colors min-h-[44px]"
-              >
-                <Shield className="w-3.5 h-3.5 text-[#F1E0C6]" />
-                <span>Trang Quản Trị Hệ Thống (/admin)</span>
-              </button>
             </div>
           </div>
         </div>
@@ -144,9 +132,8 @@ export const Footer: React.FC<FooterProps> = ({
 
       {/* Bottom Bar */}
       <div className="border-t border-[#26221D] py-6 text-center text-xs text-[#D2C4BA]/60">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto px-4">
           <p>© {new Date().getFullYear()} {settings.name}. Bản quyền thuộc về CDHome Atelier Việt Nam.</p>
-          <p className="text-[11px] font-light">Showroom Catalog • Chế tác theo yêu cầu kiến trúc sư</p>
         </div>
       </div>
     </footer>

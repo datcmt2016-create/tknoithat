@@ -8,7 +8,7 @@ interface AdminLoginProps {
 }
 
 export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess, onBackToStore }) => {
-  const [email, setEmail] = useState('admin@cdhome.vn');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -19,11 +19,12 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess, onBackTo
     setLoading(true);
 
     setTimeout(() => {
-      const ok = authService.adminLogin(password);
-      if (ok) {
+      const res = authService.adminLogin(email, password);
+      if (res.success) {
         onLoginSuccess();
       } else {
-        setError('Mật khẩu quản trị không chính xác (mặc định thử: admin123).');
+        setError(res.error || 'Email hoặc mật khẩu quản trị không chính xác.');
+        setPassword('');
       }
       setLoading(false);
     }, 200);
@@ -78,15 +79,13 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess, onBackTo
               <input
                 type="password"
                 required
+                autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Nhập mật khẩu quản trị..."
                 className="w-full pl-10 pr-3.5 py-2.5 bg-white border border-[#D2C4BA] rounded-xl text-xs text-[#1D1B17] focus:outline-none focus:border-[#523D2A]"
               />
             </div>
-            <p className="text-[10px] text-[#4E453E] mt-1 font-mono">
-              Gợi ý mật khẩu demo: admin123
-            </p>
           </div>
 
           <button

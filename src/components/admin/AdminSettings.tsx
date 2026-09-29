@@ -163,18 +163,6 @@ export const AdminSettings: React.FC<AdminSettingsProps> = ({
 
           <div className="space-y-1.5">
             <label className="text-xs font-semibold text-[#1D1B17] block">
-              Messenger username (m.me/...)
-            </label>
-            <input
-              type="text"
-              value={formData.messengerUsername}
-              onChange={(e) => handleChange('messengerUsername', e.target.value)}
-              className="w-full px-3.5 py-2.5 bg-white border border-[#D2C4BA] rounded-xl text-xs text-[#1D1B17] focus:outline-none focus:border-[#523D2A]"
-            />
-          </div>
-
-          <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-[#1D1B17] block">
               Đường dẫn Facebook Fanpage
             </label>
             <input

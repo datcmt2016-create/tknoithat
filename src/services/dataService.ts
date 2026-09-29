@@ -5,14 +5,30 @@ import { storage } from './storage';
 const PRODUCTS_KEY = 'cdhome_products_v2';
 const CATEGORIES_KEY = 'cdhome_categories_v2';
 const SETTINGS_KEY = 'cdhome_settings_v2';
+let productsMigrated = false;
+
+// Unsplash photo ids that now return 404; replaced in the seed data on 29/09/2026
+const DEAD_IMAGE_IDS = [
+  '1540518614846-7ede433c4ef7',
+  '1533090161767-e6ffed986b88',
+  '1533779283484-8da497b1736c',
+  '1580481077195-c228ff31a78a'
+];
+const isDeadImage = (url?: string) => !!url && DEAD_IMAGE_IDS.some((id) => url.includes(id));
 
 export const dataService = {
   // --- Categories ---
   getCategories(includeHidden = false): Category[] {
-    const list = storage.get<Category[]>(CATEGORIES_KEY, INITIAL_CATEGORIES);
+    let list = storage.get<Category[]>(CATEGORIES_KEY, INITIAL_CATEGORIES);
     if (!list || list.length === 0) {
       storage.set(CATEGORIES_KEY, INITIAL_CATEGORIES);
       return includeHidden ? INITIAL_CATEGORIES : INITIAL_CATEGORIES.filter((c) => c.isVisible);
+    }
+    if (list.some((c) => isDeadImage(c.image))) {
+      list = list.map((c) =>
+        isDeadImage(c.image) ? { ...c, image: INITIAL_CATEGORIES.find((s) => s.id === c.id)?.image ?? '' } : c
+      );
+      storage.set(CATEGORIES_KEY, list);
     }
     return includeHidden ? list : list.filter((c) => c.isVisible);
   },
@@ -99,6 +115,9 @@ export const dataService = {
     if (!list || list.length === 0) {
       storage.set(PRODUCTS_KEY, INITIAL_PRODUCTS);
       list = INITIAL_PRODUCTS;
+    } else if (!productsMigrated) {
+      list = this.migrateProductDetailFields(list);
+      productsMigrated = true;
     }
 
     if (!includeHidden) {
@@ -270,21 +289,67 @@ export const dataService = {
     storage.set(PRODUCTS_KEY, updated);
   },
 
+  // Fill in the detail-page fields added later for products saved in visitors' localStorage.
+  // Only missing fields are filled, so admin edits are never overwritten.
+  migrateProductDetailFields(list: Product[]): Product[] {
+    const OLD_PLACEHOLDER_DRAWING = 'https://images.unsplash.com/photo-1540518614846-7ede433c4ef7?auto=format&fit=crop&w=800&q=80';
+    let changed = false;
+    const migrated = list.map((p) => {
+      const seed = INITIAL_PRODUCTS.find((s) => s.id === p.id);
+      if (!seed) return p;
+      const next = { ...p };
+      if (next.usageDescription === undefined && seed.usageDescription) next.usageDescription = seed.usageDescription;
+      if (next.designPhilosophy === undefined && seed.designPhilosophy) next.designPhilosophy = seed.designPhilosophy;
+      if (next.suitability === undefined && seed.suitability) next.suitability = seed.suitability;
+      const drawings = next.dimensionImages || [];
+      const onlyPlaceholder = drawings.length === 1 && drawings[0] === OLD_PLACEHOLDER_DRAWING;
+      if ((drawings.length === 0 || onlyPlaceholder) && seed.dimensionImages.length > 0) {
+        next.dimensionImages = seed.dimensionImages;
+      }
+      // Swap Unsplash photos that were removed upstream (404) for the seed's current photo at the same position
+      if (next.images.some(isDeadImage)) {
+        next.images = next.images
+          .map((img, i) => (isDeadImage(img) ? seed.images[i] ?? '' : img))
+          .filter((img) => img && !isDeadImage(img));
+      }
+      if (next.lifestyleImage && isDeadImage(next.lifestyleImage)) next.lifestyleImage = seed.lifestyleImage;
+      // Only for products the admin never edited (updatedAt unchanged)
+      if (next.updatedAt === seed.updatedAt) {
+        if (seed.materials.length > (next.materials || []).length) next.materials = seed.materials;
+        if (seed.items.length > (next.items || []).length) next.items = seed.items;
+      }
+      if (JSON.stringify(next) !== JSON.stringify(p)) changed = true;
+      return next;
+    });
+    if (changed) storage.set(PRODUCTS_KEY, migrated);
+    return migrated;
+  },
+
   // --- Settings ---
   getSettings(): StoreSettings {
-    const settings = storage.get<StoreSettings>(SETTINGS_KEY, INITIAL_SETTINGS);
-    // Migrate the old default hotline still saved in visitors' localStorage
-    const OLD_DEFAULT_PHONE = '0988123456';
-    if (settings.phone === OLD_DEFAULT_PHONE || settings.zaloPhone === OLD_DEFAULT_PHONE) {
-      const migrated = {
-        ...settings,
-        phone: settings.phone === OLD_DEFAULT_PHONE ? INITIAL_SETTINGS.phone : settings.phone,
-        zaloPhone: settings.zaloPhone === OLD_DEFAULT_PHONE ? INITIAL_SETTINGS.zaloPhone : settings.zaloPhone
-      };
+    const stored = storage.get<StoreSettings & { messengerUsername?: string }>(SETTINGS_KEY, INITIAL_SETTINGS);
+    // Migrate old default values still saved in visitors' localStorage (admin-edited values are kept),
+    // and drop the removed Messenger field
+    const OLD_DEFAULTS: Partial<Record<keyof StoreSettings, string>> = {
+      phone: '0988123456',
+      zaloPhone: '0988123456',
+      address: '215 Nguyễn Văn Hưởng, Phường Thảo Điền, TP. Thủ Đức, TP. Hồ Chí Minh',
+      openingHours: '09:00 - 20:00 (Thứ 2 - Chủ Nhật)',
+      mapsUrl: 'https://maps.google.com/?q=215+Nguyen+Van+Huong+Thao+Dien+Thu+Duc'
+    };
+    const staleKeys = (Object.keys(OLD_DEFAULTS) as (keyof StoreSettings)[]).filter(
+      (k) => stored[k] === OLD_DEFAULTS[k]
+    );
+    if (staleKeys.length > 0 || 'messengerUsername' in stored) {
+      const { messengerUsername: _removed, ...settings } = stored;
+      const migrated = { ...settings } as StoreSettings;
+      for (const k of staleKeys) {
+        (migrated as unknown as Record<string, string>)[k] = INITIAL_SETTINGS[k] as string;
+      }
       storage.set(SETTINGS_KEY, migrated);
       return migrated;
     }
-    return settings;
+    return stored;
   },
 
   updateSettings(newSettings: Partial<StoreSettings>): StoreSettings {

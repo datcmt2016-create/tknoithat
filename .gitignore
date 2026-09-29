@@ -6,3 +6,6 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Output of npm run test:web
+tests/test-results.json

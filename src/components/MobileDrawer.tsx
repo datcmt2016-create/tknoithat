@@ -150,7 +150,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
           >
             <div className="flex items-center gap-2.5">
               <MapPin className="w-4 h-4 text-[#523D2A]" />
-              <span>Showroom CDHome</span>
+              <span>Về CDHome</span>
             </div>
             <ArrowRight className="w-3.5 h-3.5 text-[#4E453E]" />
           </button>

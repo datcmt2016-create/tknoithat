@@ -37,6 +37,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   const handleZaloQuote = (e: React.MouseEvent) => {
     e.stopPropagation();
+    e.preventDefault();
     contactUtils.copyAndOpenZalo(settings, product, undefined, onShowToast);
   };
 
@@ -72,14 +73,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
         {/* Heart Wishlist Button (Min 44x44px tap target) */}
         <button
-          onClick={(e) => onToggleWishlist(e, product)}
+          type="button"
+          onClick={(e) => {
+            // Keep the click from reaching the card, which would open the product page
+            e.stopPropagation();
+            e.preventDefault();
+            onToggleWishlist(e, product);
+          }}
           className={`absolute top-2 right-2 min-w-[44px] min-h-[44px] rounded-full flex items-center justify-center transition-all z-10 ${
             isWishlisted
               ? 'text-red-600 bg-white/95 shadow-md scale-105'
               : 'text-[#4E453E] bg-[#FEF9F2]/80 hover:text-red-500 hover:bg-white shadow-xs backdrop-blur-xs'
           }`}
           title={isWishlisted ? 'Xóa khỏi yêu thích' : 'Lưu vào yêu thích'}
-          aria-label="Lưu sản phẩm"
+          aria-label={isWishlisted ? `Bỏ lưu ${product.name}` : `Lưu ${product.name} vào yêu thích`}
+          aria-pressed={isWishlisted}
         >
           <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />
         </button>
@@ -88,6 +96,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity hidden sm:flex items-center justify-between pointer-events-auto">
           <span className="text-[11px] text-[#FEF9F2] font-medium">Báo giá & Mẫu gỗ</span>
           <button
+            type="button"
             onClick={handleZaloQuote}
             className="px-3 py-1.5 rounded-lg bg-[#523D2A] hover:bg-[#6B5440] text-white text-xs font-semibold flex items-center gap-1 shadow-md transition-transform active:scale-95"
             title="Nhận báo giá qua Zalo"

@@ -6,6 +6,7 @@ import {
 import { Product, StoreSettings, User } from '../types';
 import { contactUtils } from '../utils/contact';
 import { ProductCard } from './ProductCard';
+import { ProductSpecs } from './ProductSpecs';
 
 interface ProductDetailPageProps {
   product: Product;
@@ -13,6 +14,7 @@ interface ProductDetailPageProps {
   settings: StoreSettings;
   user: User | null;
   isWishlisted: boolean;
+  wishlistIds: string[];
   onToggleWishlist: (product: Product) => void;
   onSelectProduct: (product: Product) => void;
   onBackToCatalog: () => void;
@@ -25,6 +27,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   settings,
   user,
   isWishlisted,
+  wishlistIds,
   onToggleWishlist,
   onSelectProduct,
   onBackToCatalog,
@@ -33,6 +36,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
+  const [focusDimensionsRequest, setFocusDimensionsRequest] = useState(0);
 
   useEffect(() => {
     setSelectedImageIndex(product.mainImageIndex || 0);
@@ -42,10 +46,6 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
   const handleZaloQuote = () => {
     contactUtils.copyAndOpenZalo(settings, product, undefined, onShowToast);
-  };
-
-  const handleMessengerQuote = () => {
-    contactUtils.copyAndOpenMessenger(settings, product, undefined, onShowToast);
   };
 
   const handleShare = () => {
@@ -60,11 +60,11 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   return (
     <div className="font-sans pb-28 md:pb-16 animate-in fade-in duration-200">
       {/* Breadcrumb Navigation */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1">
         <nav className="flex items-center gap-1.5 text-xs text-[#4E453E] overflow-x-auto whitespace-nowrap">
           <button
             onClick={onBackToCatalog}
-            className="hover:text-[#523D2A] transition-colors flex items-center gap-1"
+            className="hover:text-[#523D2A] transition-colors flex items-center gap-1 min-h-[44px]"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Catalog CDHome</span>
@@ -94,7 +94,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               {/* Lightbox zoom button */}
               <button
                 onClick={() => setIsLightboxOpen(true)}
-                className="absolute bottom-3 right-3 p-2 bg-[#FEF9F2]/80 hover:bg-white rounded-full text-[#1D1B17] shadow-sm backdrop-blur-xs transition-colors"
+                className="absolute bottom-3 right-3 min-w-[44px] min-h-[44px] flex items-center justify-center bg-[#FEF9F2]/80 hover:bg-white rounded-full text-[#1D1B17] shadow-sm backdrop-blur-xs transition-colors"
                 title="Phóng to ảnh"
                 aria-label="Phóng to ảnh"
               >
@@ -231,6 +231,14 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     </div>
                   ))}
                 </div>
+                <button
+                  type="button"
+                  onClick={() => setFocusDimensionsRequest((n) => n + 1)}
+                  className="pt-1 text-xs font-semibold text-[#523D2A] hover:underline flex items-center gap-1 min-h-[44px]"
+                >
+                  <span>{product.dimensionImages.length > 0 ? 'Xem bản vẽ kỹ thuật & thông số chi tiết' : 'Xem thông số chi tiết'}</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
               </div>
             )}
 
@@ -244,23 +252,14 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                 <span>Nhận Báo Giá Qua Zalo</span>
               </button>
 
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  onClick={handleMessengerQuote}
-                  className="py-3 px-3 bg-white border border-[#D2C4BA] hover:bg-[#F2EDE6] text-[#1D1B17] rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors min-h-[44px]"
-                >
-                  <MessageSquare className="w-3.5 h-3.5 text-[#0084FF]" />
-                  <span>Messenger</span>
-                </button>
-
-                <a
-                  href={`tel:${settings.phone}`}
-                  className="py-3 px-3 bg-white border border-[#D2C4BA] hover:bg-[#F2EDE6] text-[#1D1B17] rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors min-h-[44px]"
-                >
-                  <Phone className="w-3.5 h-3.5 text-[#523D2A]" />
-                  <span>Gọi Hotline</span>
-                </a>
-              </div>
+              <a
+                href={`tel:${settings.phone}`}
+                className="w-full py-3 px-3 bg-white border border-[#D2C4BA] hover:bg-[#F2EDE6] text-[#1D1B17] rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors min-h-[44px]"
+              >
+                <Phone className="w-3.5 h-3.5 text-[#523D2A]" />
+                <span>Gọi Hotline</span>
+                <span className="font-mono text-[#523D2A]">{settings.phone}</span>
+              </a>
 
               <p className="text-[11px] text-[#4E453E] text-center font-light pt-1">
                 Quý khách có thể gửi mặt bằng kiến trúc để chuyên gia tư vấn phối cảnh 3D miễn phí.
@@ -269,7 +268,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
           </div>
         </div>
 
-        {/* Detailed Sections: Highlights, Materials, Specs (Hides any section with empty data) */}
+        {/* Technical Specs & Details: Dimensions, Design, Materials, Usage (tabs on desktop, accordion on mobile) */}
+        <ProductSpecs key={product.id} product={product} focusDimensionsRequest={focusDimensionsRequest} />
+
+        {/* Highlights (hidden when empty) */}
         {product.highlights && product.highlights.length > 0 && (
           <div className="mt-16 pt-12 border-t border-[#D2C4BA] space-y-6">
             <h2 className="font-serif text-2xl text-[#1D1B17]">
@@ -283,25 +285,6 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                   {h.image && (
                     <img src={h.image} alt={h.title} className="w-full h-48 object-cover rounded-xl mt-3 border border-[#D2C4BA]" />
                   )}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Materials Table */}
-        {product.materials && product.materials.length > 0 && (
-          <div className="mt-12 space-y-4">
-            <h2 className="font-serif text-2xl text-[#1D1B17]">
-              Vật Liệu Cấu Thành
-            </h2>
-            <div className="bg-white rounded-2xl border border-[#D2C4BA] overflow-hidden divide-y divide-[#F2EDE6]">
-              {product.materials.map((m, i) => (
-                <div key={i} className="grid grid-cols-1 sm:grid-cols-3 p-4 text-xs">
-                  <span className="font-semibold text-[#523D2A]">{m.part}</span>
-                  <span className="sm:col-span-2 text-[#1D1B17] font-light leading-relaxed mt-1 sm:mt-0">
-                    {m.material}
-                  </span>
                 </div>
               ))}
             </div>
@@ -334,7 +317,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                 <ProductCard
                   key={rel.id}
                   product={rel}
-                  isWishlisted={false}
+                  isWishlisted={wishlistIds.includes(rel.id)}
                   onToggleWishlist={(_, p) => onToggleWishlist(p)}
                   onSelectProduct={onSelectProduct}
                   settings={settings}

@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" font-family="'Be Vietnam Pro', Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+      <path d="M0 1 L10 5 L0 9 z" fill="#523D2A"/>
+    </marker>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0 L0 0 0 20" fill="none" stroke="#E8DFD3" stroke-width="0.6"/>
+    </pattern>
+  </defs>
+  <rect width="1000" height="640" fill="#FEF9F2"/>
+  <rect width="1000" height="640" fill="url(#grid)"/>
+  <rect x="12" y="12" width="976" height="616" fill="none" stroke="#523D2A" stroke-width="1.5"/>
+
+  <g font-size="13" font-weight="700" fill="#523D2A" letter-spacing="2">
+    <text x="90" y="80">MẶT BẰNG</text>
+    <text x="560" y="80">MẶT ĐỨNG CHÍNH</text>
+    <text x="560" y="355">MẶT ĐỨNG CẠNH</text>
+  </g>
+
+  <!-- PLAN VIEW (cm × 1.6) -->
+  <g transform="translate(90,110) scale(1.6)" stroke="#523D2A" fill="none" stroke-width="0.9">
+    <rect x="0" y="0" width="190" height="215" fill="#F2EDE6"/>
+    <rect x="0" y="0" width="190" height="6" fill="#C2A385"/>
+    <rect x="5" y="10" width="180" height="200" rx="3" stroke-dasharray="3 2" fill="#FEF9F2"/>
+    <rect x="30" y="16" width="55" height="26" rx="6" stroke-width="0.6"/>
+    <rect x="105" y="16" width="55" height="26" rx="6" stroke-width="0.6"/>
+    <text x="95" y="120" font-size="8" fill="#4E453E" stroke="none" text-anchor="middle">Lọt lòng đệm 180 × 200</text>
+    <!-- width dim -->
+    <line x1="0" y1="218" x2="0" y2="232" stroke-width="0.4"/>
+    <line x1="190" y1="218" x2="190" y2="232" stroke-width="0.4"/>
+    <line x1="0" y1="228" x2="190" y2="228" stroke-width="0.6" marker-start="url(#a)" marker-end="url(#a)"/>
+    <text x="95" y="224" font-size="8" font-weight="700" fill="#1D1B17" stroke="none" text-anchor="middle">R 190</text>
+    <!-- length dim -->
+    <line x1="193" y1="0" x2="207" y2="0" stroke-width="0.4"/>
+    <line x1="193" y1="215" x2="207" y2="215" stroke-width="0.4"/>
+    <line x1="203" y1="0" x2="203" y2="215" stroke-width="0.6" marker-start="url(#a)" marker-end="url(#a)"/>
+    <text x="0" y="0" font-size="8" font-weight="700" fill="#1D1B17" stroke="none" text-anchor="middle" transform="translate(199,107.5) rotate(-90)">D 215</text>
+  </g>
+
+  <!-- FRONT ELEVATION -->
+  <g transform="translate(560,110) scale(1.6)" stroke="#523D2A" fill="none" stroke-width="0.9">
+    <line x1="-12" y1="95" x2="202" y2="95" stroke-width="0.5"/>
+    <path d="M0 95 L0 9 Q0 0 9 0 L181 0 Q190 0 190 9 L190 95 Z" fill="#E6D5C0"/>
+    <rect x="5" y="35" width="180" height="25" rx="4" stroke-dasharray="3 2" fill="#FEF9F2"/>
+    <rect x="0" y="60" width="190" height="23" fill="#C2A385"/>
+    <rect x="4" y="83" width="8" height="12" fill="#5C4433"/>
+    <rect x="178" y="83" width="8" height="12" fill="#5C4433"/>
+    <!-- width -->
+    <line x1="0" y1="98" x2="0" y2="112" stroke-width="0.4"/>
+    <line x1="190" y1="98" x2="190" y2="112" stroke-width="0.4"/>
+    <line x1="0" y1="108" x2="190" y2="108" stroke-width="0.6" marker-start="url(#a)" marker-end="url(#a)"/>
+    <text x="95" y="104" font-size="8" font-weight="700" fill="#1D1B17" stroke="none" text-anchor="middle">R 190</text>
+    <!-- height -->
+    <line x1="193" y1="0" x2="207" y2="0" stroke-width="0.4"/>
+    <line x1="203" y1="0" x2="203" y2="95" stroke-width="0.6" marker-start="url(#a)" marker-end="url(#a)"/>
+    <text font-size="8" font-weight="700" fill="#1D1B17" stroke="none" text-anchor="middle" transform="translate(199,47.5) rotate(-90)">C 95</text>
+    <!-- rail height -->
+    <line x1="-3" y1="60" x2="-17" y2="60" stroke-width="0.4"/>
+    <line x1="-13" y1="60" x2="-13" y2="95" stroke-width="0.6" marker-start="url(#a)" marker-end="url(#a)"/>
+    <text font-size="7" fill="#4E453E" stroke="none" text-anchor="middle" transform="translate(-16,77.5) rotate(-90)">35</text>
+  </g>
+
+  <!-- SIDE ELEVATION -->
+  <g transform="translate(560,380) scale(1.6)" stroke="#523D2A" fill="none" stroke-width="0.9">
+    <line x1="-12" y1="95" x2="222" y2="95" stroke-width="0.5"/>
+    <path d="M0 95 L0 8 Q0 0 6 0 L10 0 L7 95 Z" fill="#E6D5C0"/>
+    <rect x="10" y="35" width="200" height="25" rx="4" stroke-dasharray="3 2" fill="#FEF9F2"/>
+    <rect x="6" y="60" width="209" height="23" fill="#C2A385"/>
+    <rect x="7" y="83" width="8" height="12" fill="#5C4433"/>
+    <rect x="205" y="83" width="8" height="12" fill="#5C4433"/>
+    <text x="30" y="25" font-size="7" fill="#4E453E" stroke="none">Tựa đầu nghiêng 105°</text>
+    <!-- length -->
+    <line x1="0" y1="98" x2="0" y2="112" stroke-width="0.4"/>
+    <line x1="215" y1="98" x2="215" y2="112" stroke-width="0.4"/>
+    <line x1="0" y1="108" x2="215" y2="108" stroke-width="0.6" marker-start="url(#a)" marker-end="url(#a)"/>
+    <text x="107.5" y="104" font-size="8" font-weight="700" fill="#1D1B17" stroke="none" text-anchor="middle">D 215</text>
+    <!-- height -->
+    <line x1="-3" y1="0" x2="-17" y2="0" stroke-width="0.4"/>
+    <line x1="-13" y1="0" x2="-13" y2="95" stroke-width="0.6" marker-start="url(#a)" marker-end="url(#a)"/>
+    <text font-size="8" font-weight="700" fill="#1D1B17" stroke="none" text-anchor="middle" transform="translate(-16,47.5) rotate(-90)">C 95</text>
+  </g>
+
+  <!-- TITLE BLOCK -->
+  <g font-size="12" fill="#1D1B17">
+    <line x1="12" y1="580" x2="988" y2="580" stroke="#523D2A" stroke-width="1"/>
+    <text x="30" y="609" font-weight="700" fill="#523D2A" letter-spacing="1">CDH-BD-01 · GIƯỜNG MỘC MIÊN — KING SIZE</text>
+    <text x="560" y="609">Kích thước tổng: D 215 × R 190 × C 95</text>
+    <text x="970" y="609" text-anchor="end" fill="#4E453E">Đơn vị: cm</text>
+  </g>
+</svg>

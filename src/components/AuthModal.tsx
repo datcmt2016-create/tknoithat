@@ -21,6 +21,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [mode, setMode] = useState<'login' | 'register'>(initialMode);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -30,14 +31,27 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       setError(null);
       setUsername('');
       setPassword('');
+      setConfirmPassword('');
     }
   }, [isOpen, initialMode]);
 
   if (!isOpen) return null;
 
+  const switchMode = (next: 'login' | 'register') => {
+    setMode(next);
+    setError(null);
+    setConfirmPassword('');
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    if (mode === 'register' && password !== confirmPassword) {
+      setError('Mật khẩu xác nhận không khớp');
+      return;
+    }
+
     setLoading(true);
 
     setTimeout(() => {
@@ -67,6 +81,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     if (res.success && res.user) {
       onSuccess(res.user);
       onClose();
+    } else {
+      setError(res.error || 'Không đăng nhập được tài khoản mẫu.');
     }
   };
 
@@ -108,7 +124,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         <div className="grid grid-cols-2 border-b border-[#D2C4BA] bg-[#F2EDE6]">
           <button
             type="button"
-            onClick={() => { setMode('login'); setError(null); }}
+            onClick={() => switchMode('login')}
             className={`py-3 text-xs font-semibold uppercase tracking-wider transition-colors ${
               mode === 'login'
                 ? 'bg-[#FEF9F2] text-[#523D2A] border-b-2 border-[#523D2A]'
@@ -119,7 +135,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           </button>
           <button
             type="button"
-            onClick={() => { setMode('register'); setError(null); }}
+            onClick={() => switchMode('register')}
             className={`py-3 text-xs font-semibold uppercase tracking-wider transition-colors ${
               mode === 'register'
                 ? 'bg-[#FEF9F2] text-[#523D2A] border-b-2 border-[#523D2A]'
@@ -174,6 +190,28 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               />
             </div>
           </div>
+
+          {mode === 'register' && (
+            <div>
+              <label htmlFor="auth-confirm-password" className="block text-xs font-medium text-[#4E453E] mb-1.5">
+                Nhập lại mật khẩu xác minh
+              </label>
+              <input
+                id="auth-confirm-password"
+                type="password"
+                required
+                autoComplete="new-password"
+                placeholder="Nhập lại mật khẩu ở trên"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className={`w-full px-3.5 py-2.5 bg-white border rounded-xl text-sm text-[#1D1B17] focus:outline-none focus:ring-1 ${
+                  confirmPassword && confirmPassword !== password
+                    ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
+                    : 'border-[#D2C4BA] focus:border-[#523D2A] focus:ring-[#523D2A]'
+                }`}
+              />
+            </div>
+          )}
 
           <button
             type="submit"

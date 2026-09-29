@@ -11,6 +11,7 @@ interface NavbarProps {
   wishlistCount: number;
   onOpenMobileDrawer: () => void;
   onNavigateToFavorites: () => void;
+  onNavigateToShowroom: () => void;
   onOpenAuth: (mode?: 'login' | 'register') => void;
   onLogout: () => void;
   onSelectProduct: (product: Product) => void;
@@ -28,6 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   wishlistCount,
   onOpenMobileDrawer,
   onNavigateToFavorites,
+  onNavigateToShowroom,
   onOpenAuth,
   onLogout,
   onSelectProduct,
@@ -107,7 +109,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <form onSubmit={handleFormSubmit} className="relative">
             <button
               type="submit"
-              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#4E453E] hover:text-[#523D2A] p-0.5"
+              className="absolute left-1.5 top-1/2 -translate-y-1/2 text-[#4E453E] hover:text-[#523D2A] min-w-[32px] min-h-[32px] flex items-center justify-center rounded-full"
               aria-label="Tìm kiếm"
             >
               <Search className="w-4 h-4" />
@@ -187,8 +189,16 @@ export const Navbar: React.FC<NavbarProps> = ({
           )}
         </div>
 
-        {/* Right: Hotline, Favorites, Account */}
+        {/* Right: About, Hotline, Favorites, Account */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          {/* About CDHome (desktop; mobile uses the drawer link) */}
+          <button
+            onClick={onNavigateToShowroom}
+            className="hidden lg:flex items-center px-4 py-2 rounded-full whitespace-nowrap bg-[#523D2A] text-xs font-semibold text-white hover:bg-[#6B5440] transition-colors min-h-[44px]"
+          >
+            Về CDHome
+          </button>
+
           {/* Hotline Quick Call (desktop) */}
           <a
             href={`tel:${settings.phone}`}
@@ -296,7 +306,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             placeholder="Tìm sofa, bàn ăn, giường Mộc Miên..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full pl-10 pr-8 py-2 bg-white border border-[#D2C4BA] rounded-full text-xs text-[#1D1B17] placeholder:text-[#4E453E]/70 focus:outline-none focus:border-[#523D2A] min-h-[40px]"
+            className="w-full pl-10 pr-8 py-2 bg-white border border-[#D2C4BA] rounded-full text-xs text-[#1D1B17] placeholder:text-[#4E453E]/70 focus:outline-none focus:border-[#523D2A] min-h-[44px]"
           />
           {searchQuery && (
             <button
